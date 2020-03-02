@@ -1,0 +1,25 @@
+﻿@model Postagem
+@{
+    ViewData["Title"] = $"#{Model.IdFormatado}{(Model.Titulo != null ? " - " + Model.Titulo : "")}";
+}
+
+<!-- Postagem -->
+<section>
+    <partial name="_PostagemPartial" model="Model" view-data="ViewData"/>
+</section>
+
+<!-- Formulário de comentário -->
+<section>
+    <h2><i class="fa fa-comment"></i> Enviar comentário</h2>
+    <partial name="_NovoComentarioPartial" model="@(new PostagemNovaViewModel {PostagemOriginalId = Model.Id, Texto = (string) ViewData["Comentario"]})"/>
+</section>
+
+
+<!-- Comentários -->
+<section>
+    <h2><i class="fa fa-comments"></i> Comentários (@Model.Comentarios.Count)</h2>
+    @foreach (Postagem comentario in Model.Comentarios.OrderByDescending(c => c.Id))
+    {
+        <partial name="_ComentarioPartial" model="comentario" view-data="ViewData"/>
+    }
+</section>

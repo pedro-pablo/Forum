@@ -1,0 +1,68 @@
+﻿@model MinhaContaViewModel
+@{
+    ViewData["Title"] = "Minha conta";
+}
+
+<!-- TODO: continuar -->
+<!-- Alteração de senha -->
+@if (ViewData["SenhaAlterada"] != null)
+{
+    <div>
+        <h3 class="sucesso">Senha alterada com sucesso!</h3>
+    </div>
+}
+
+@Html.ValidationSummary(true)
+
+<section>
+    <h2>Alteração de senha</h2>
+
+    <p>
+        Dolores impedit sit et eius ipsa et magni. Dolor voluptatem qui dolores reiciendis.
+        Ut dolor aut iure dolorum nisi quia modi occaecati.
+    </p>
+
+    <form id="form-alterarsenha" asp-action="AlterarSenha" asp-controller="Usuario" asp-antiforgery="true" method="post">
+        <div class="campo-form">
+            <label asp-for="AlterarSenha.SenhaAtual"></label>
+            <input asp-for="AlterarSenha.SenhaAtual"/>
+            <span asp-validation-for="AlterarSenha.SenhaAtual"></span>
+        </div>
+
+        <div class="campo-form">
+            <label asp-for="AlterarSenha.SenhaNova"></label>
+            <input asp-for="AlterarSenha.SenhaNova"/>
+            <span asp-validation-for="AlterarSenha.SenhaNova"></span>
+        </div>
+
+        <div class="campo-form">
+            <button type="submit" class="perigo"><i class="fa fa-key"></i> Alterar senha</button>
+        </div>
+    </form>
+    <!--TODO: criar formulário para alteração de senha -->
+</section>
+
+<!-- Desativação da conta -->
+<section>
+    <h2>Desativação da conta</h2>
+
+    <p>
+        Dolorem amet id nobis quo quis. Rerum ut fugit rerum ducimus velit perspiciatis. Hic et aut non.
+        <br/><br/>
+        Veritatis dolorum optio voluptatibus aut quam eius inventore. Eveniet provident dolor est earum corporis molestiae vel fugiat.
+        Natus id exercitationem voluptatum. Omnis quis facere reprehenderit amet dolor sed voluptatem voluptatem.
+        Rerum voluptas et qui rerum in voluptate. Laudantium et atque voluptates nulla omnis.
+    </p>
+
+    <form id="form-desativar" asp-action="DesativarConta" asp-controller="Usuario" asp-antiforgery="true" method="post">
+        <div class="campo-form">
+            <label asp-for="DesativarConta.Senha"></label>
+            <input asp-for="DesativarConta.Senha"/>
+            <span asp-validation-for="DesativarConta.Senha"></span>
+        </div>
+
+        <div class="campo-form">
+            <button type="submit" class="perigo"><i class="fa fa-trash"></i> Desativar conta</button>
+        </div>
+    </form>
+</section>

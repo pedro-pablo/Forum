@@ -1,0 +1,95 @@
+﻿@model Postagem
+@{
+    bool detalhes = ViewData["Detalhes"] != null, punicao = ViewData["Punicao"] != null;
+}
+<article id="post-@Model.IdFormatado" class="post" data-post-id="@Model.Id">
+    @if (!detalhes)
+    {
+        <div>
+            @if (Model.Comentario)
+            {
+                <h3>
+                    #@Model.IdFormatado (Comentário em <a asp-action="Detalhes" asp-controller="Postagens" asp-route-postagemId="@Model.PostagemOriginal.Id">#@Model.PostagemOriginal.IdFormatado</a>)
+                </h3>
+            }
+            else
+            {
+                <h3>
+                    <a asp-action="Detalhes" asp-controller="Postagens" asp-route-postagemId="@Model.Id">
+                        #@Model.IdFormatado
+                        @if (!string.IsNullOrWhiteSpace(Model.Titulo))
+                        {
+                            <span>@Model.Titulo</span>
+                        }
+                    </a>
+                </h3>
+            }
+        </div>
+    }
+    <div>
+        @if (Model.Arquivos != null && Model.Arquivos.Count(a => !a.Removido) > 0)
+        {
+            @if (!detalhes)
+            {
+                <button onclick="alterarVisibilidadeArquivos('post-@Model.IdFormatado')">Mostrar/esconder arquivos (@Model.Arquivos.Count)</button>
+            }
+            <div class="post-arquivos" @(!detalhes ? "style=display:none;" : "")>
+                @foreach (var arquivo in Model.Arquivos)
+                {
+                    <div class="post-arquivo">
+                        <span>@arquivo.NomeEnviado</span>
+                        @switch (arquivo.Tipo)
+                        {
+                            case TipoArquivo.Imagem:
+                                <span>Imagem@(arquivo.NomeArquivo.EndsWith(".gif") ? " (GIF)" : "")</span>
+                                <img class="post-imagem" title="@arquivo.NomeEnviado" src="~/userfiles/thumbnails/@arquivo.NomeThumbnail" alt="Thumbnail de @arquivo.NomeArquivo"/>
+                                break;
+                            case TipoArquivo.Audio:
+                                <span>Áudio</span>
+                                <a href="userfiles/@arquivo.NomeArquivo" title="@arquivo.NomeEnviado" target="_blank">
+                                    <img src="images/audio_icon.svg" class="post-audio-thumbnail" title="@arquivo.NomeEnviado"/>
+                                </a>
+                                break;
+                            case TipoArquivo.Video:
+                                <span>Vídeo</span>
+                                <video class="post-video" title="@arquivo.NomeEnviado" controls width="200">
+                                    <source src="~/userfiles/@arquivo.NomeArquivo"/>
+                                </video>
+                                break;
+                        }
+                        <a href="~/userfiles/@arquivo.NomeArquivo" target="_blank">
+                            Arquivo original
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        <div class="post-texto-container">
+            <div class="quote-left">
+                <i class="fa fa-quote-left"></i>
+            </div>
+            <p class="post-texto">
+                @Model.Texto
+            </p>
+            <div class="quote-right">
+                <i class="fa fa-quote-right"></i>
+            </div>
+        </div>
+    </div>
+    <div class="post-rodape">
+        @if (!detalhes && !punicao && !Model.Comentario)
+        {
+            <div>
+                <i class="fa fa-comments"></i>
+                <a asp-action="Detalhes" asp-controller="Postagens" asp-route-postagemId="@Model.Id">
+                    <span class="qtd-comentarios"></span> comentários
+                </a>
+            </div>
+        }
+
+        <span class="post-publicacao" title="Data e hora de publicação">
+            <i class="fa fa-clock-o"></i>
+            @Model.Publicacao.GetValueOrDefault().ToUniversalTime()
+        </span>
+    </div>
+</article>

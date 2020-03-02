@@ -1,0 +1,13 @@
+﻿@model PostagemNovaViewModel
+<form id="form-comentario" asp-controller="Postagens" asp-action="Comentar" method="post">
+    <input type="hidden" asp-for="PostagemOriginalId"/>
+
+    <div class="campo-form">
+        <textarea asp-for="Texto"></textarea>
+        <span asp-validation-for="Texto"></span>
+    </div>
+
+    <button type="submit">
+        <i class="fa fa-send"></i> Comentar
+    </button>
+</form>

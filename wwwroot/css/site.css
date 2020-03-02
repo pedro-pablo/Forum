@@ -1,0 +1,267 @@
+﻿/* HTML Tags */
+html, body { height: 100%; }
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    width: 100%;
+}
+
+*:focus { outline: 2px solid lightskyblue; }
+
+header {
+    align-items: center;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    padding: .5em;
+    text-align: center;
+}
+
+header > * { width: 100%; }
+
+nav {
+    display: flex;
+    flex-flow: column wrap;
+    padding-top: .5em;
+}
+
+nav > a { padding: .5em 0; }
+
+main {
+    min-height: 70%;
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+a { text-decoration: none; }
+
+a:visited { color: blue; }
+
+button:active {
+    background-color: darkgray;
+    outline: none;
+}
+
+p {
+    margin: .5em 0;
+    text-align: justify;
+}
+
+textarea {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    max-width: 100%;
+    min-height: 4em;
+    min-width: 100%;
+}
+
+form {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+button {
+    background: none;
+    border: 1px solid blue;
+    color: blue;
+    outline: none;
+    padding: .5em;
+}
+
+button:active {
+    background-color: blue;
+    color: white;
+}
+
+
+table, th, td { border: 1px solid black; }
+
+table {
+    border-collapse: collapse;
+    font-family: monospace;
+    padding: .5em;
+    width: 100%;
+}
+
+table td {
+    height: 1em;
+    text-align: center;
+}
+
+/* IDs */
+
+#titulo-site {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+#form-postagem, #form-cadastro, #form-punir {
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    padding: 1em;
+}
+
+#form-postagem { border: 1px solid black; }
+
+#form-comentario { display: block; }
+
+/* Classes */
+
+.validation-summary-errors { color: red; }
+
+.alerta { color: darkorange; }
+
+button.alerta { border-color: darkorange; }
+
+button.alerta:active {
+    background-color: darkorange;
+    color: black;
+}
+
+.perigo { color: red; }
+
+button.perigo { border-color: red; }
+
+button.perigo:active {
+    background-color: red;
+    color: white;
+}
+
+.sucesso { color: green; }
+
+button.sucesso { border-color: green; }
+
+button.sucesso:active {
+    background-color: green;
+    color: white;
+}
+
+.campo-form {
+    align-content: center;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    margin: 1.2em 0;
+}
+
+.campo-form > * { width: 100%; }
+
+.field-validation-error { color: red; }
+
+.form-arquivos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.form-arquivo {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 1em;
+}
+
+.observacao { font-size: .8em; }
+
+.post, .comentario {
+    border: 1px solid black;
+    margin: 1em 0 1em 0;
+    padding: .5em;
+}
+
+.post-arquivos {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.post-arquivo {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 1em;
+    text-align: center;
+}
+
+.post-imagem, .post-video { max-width: 100%; }
+
+.post-video { max-height: 250px; }
+
+.post-audio-thumbnail {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.post-texto-container {
+    background-color: lightgray;
+    margin: 1em 0;
+    padding: .5em;
+}
+
+
+.post-texto-container > .quote-left { text-align: left; }
+
+.post-texto-container > .quote-right { text-align: right; }
+
+.post-texto {
+    font-size: 1.1em;
+    margin: 0;
+    text-align: center;
+}
+
+.post-rodape {
+    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+.qtd-comentarios { font-weight: bold; }
+
+.post-publicacao { font-size: .9em; }
+
+.tabela-container { overflow-x: auto; }
+
+/* Media Queries */
+
+/* Tablet */
+
+@media only screen and (min-width: 425px) {
+    main {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+}
+
+/* Notebook */
+
+@media only screen and (min-width: 768px) {
+    nav {
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        width: 50%;
+    }
+
+    .post-arquivos { flex-flow: row wrap; }
+
+    .post-rodape {
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+    }
+
+    form {
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+    }
+}
+
+/* Desktop */
+
+@media only screen and (min-width: 1440px) {
+    main {
+        padding-left: 25%;
+        padding-right: 25%;
+    }
+
+    nav { width: 40%; }
+}

@@ -1,0 +1,43 @@
+﻿@model UsuarioLoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    string urlRetorno = (string) ViewData["UrlRetorno"];
+}
+
+<section>
+    <h2>Formulário de acesso</h2>
+    @if (urlRetorno != null)
+    {
+        <p>
+            Você precisa estar logado para acessar esta página.
+        </p>
+    }
+    <p>Preencha os campos abaixo para acessar sua conta.</p>
+    <p>
+        Caso ainda não esteja cadastrado, clique <a asp-action="Cadastro" asp-controller="Usuario">aqui</a> para
+        criar sua conta. É rápido, seguro e de graça!
+    </p>
+
+    @Html.ValidationSummary(true)
+
+    <form id="form-login" asp-action="Login" asp-controller="Usuario" asp-antiforgery="true" method="post">
+
+        @if (urlRetorno != null)
+        {
+            <input type="hidden" asp-for="UrlRetorno" value="@urlRetorno"/>
+        }
+        <div class="campo-form">
+            <label asp-for="Nome"></label>
+            <input asp-for="Nome"/>
+            <span asp-validation-for="Nome"></span>
+        </div>
+        <div class="campo-form">
+            <label asp-for="Senha"></label>
+            <input asp-for="Senha"/>
+            <span asp-validation-for="Senha"></span>
+        </div>
+        <div class="campo-form">
+            <button type="submit">Entrar</button>
+        </div>
+    </form>
+</section>

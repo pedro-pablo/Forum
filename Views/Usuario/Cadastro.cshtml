@@ -1,0 +1,45 @@
+﻿@model UsuarioCadastroViewModel
+@{
+    ViewData["Title"] = "Cadastro de usuário";
+}
+
+<section>
+    <h2>Formulário de criação de conta</h2>
+
+    @Html.ValidationSummary(true)
+
+    <form id="form-cadastro" asp-action="Cadastro" asp-controller="Usuario" asp-antiforgery="true" method="post">
+
+        <div class="campo-form">
+            <label asp-for="Nome"></label>
+            <input asp-for="Nome"/>
+            <span asp-validation-for="Nome"></span>
+        </div>
+
+        <div class="campo-form">
+            <label asp-for="Senha"></label>
+            <input asp-for="Senha"/>
+            <span asp-validation-for="Senha"></span>
+        </div>
+
+        <div class="campo-form">
+            <label asp-for="SenhaConfirmacao"></label>
+            <input asp-for="SenhaConfirmacao"/>
+            <span asp-validation-for="SenhaConfirmacao"></span>
+        </div>
+
+        <div class="campo-form">
+            <label asp-for="Email"></label>
+            <input asp-for="Email"/>
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div>
+            <label>Li e concordo com os <a asp-action="Termos" asp-controller="Home" target="_blank">termos de uso, política de privacidade e regras de postagem do site</a>.</label>
+            <input type="checkbox" asp-for="Termos"/>
+            <span asp-validation-for="Termos"></span>
+        </div>
+
+        <button type="submit">Criar conta</button>
+    </form>
+</section>

@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Minhas postagens";
+    List<Postagem> postagens = (List<Postagem>) ViewData["Postagens"];
+}
+
+<!-- Postagens -->
+<section>
+    @if (postagens.Count > 0)
+    {
+        for (int i = 0; i < postagens.Count; i++)
+        {
+            <partial name="_PostagemPartial" model="postagens[i]" view-data="ViewData"/>
+        }
+
+@section Scripts
+{
+    <script>
+        atualizarComentarios();
+        setInterval(atualizarComentarios, 3000);
+    </script>
+}    }
+    else
+    {
+        <h3>Você não tem nenhuma postagem ou comentário :(</h3>
+    }
+</section>

@@ -1,0 +1,12 @@
+﻿@model Postagem
+
+<article class="comentario">
+    <strong>#@Model.IdFormatado</strong>
+    <p>
+        @Model.Texto
+    </p>
+    <span class="post-publicacao" title="Data e hora de publicação">
+        <i class="fa fa-clock-o"></i>
+        @Model.Publicacao.GetValueOrDefault().ToUniversalTime()
+    </span>
+</article>

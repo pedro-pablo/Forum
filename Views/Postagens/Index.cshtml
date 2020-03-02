@@ -1,0 +1,91 @@
+﻿@model PostagemNovaViewModel
+
+@{
+    ViewData["Title"] = "Postagens";
+    var postagens = (List<Postagem>) ViewData["PostagensPagina"];
+}
+
+<section>
+    <h2>Enviar postagem</h2>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            Utilize o formulário abaixo para enviar uma nova postagem.
+        </p>
+
+        @Html.ValidationSummary(true)
+
+        <form id="form-postagem" asp-action="Enviar" asp-controller="Postagens" asp-antiforgery="true" enctype="multipart/form-data">
+            <input asp-for="PostagemOriginalId" type="hidden" value="-1"/>
+
+            <div class="campo-form">
+                <label asp-for="Titulo"></label>
+                <input asp-for="Titulo"/>
+                <span asp-validation-for="Titulo"></span>
+            </div>
+
+            <div class="campo-form">
+                <label asp-for="Texto"></label>
+                <textarea asp-for="Texto"></textarea>
+                <span asp-validation-for="Texto"></span>
+            </div>
+
+            <div class="campo-form">
+                <label asp-for="Arquivos"></label>
+                <p class="observacao">
+                    Formatos permitidos: @string.Join(", ", Arquivo.FormatosPermitidos.Values)
+                    <br/>
+                    Tamanho máx. por arquivo: @(Arquivo.TamanhoMaximoBytes / 1024 / 1024) MiB
+                </p>
+                <div class="form-arquivos">
+                    <div class="form-arquivo">
+                        <span>Arquivo 1:</span>
+                        <input type="file" value="Enviar imagem" asp-for="Arquivos"/>
+                    </div>
+                    <div class="form-arquivo">
+                        <span>Arquivo 2:</span>
+                        <input type="file" value="Enviar imagem" asp-for="Arquivos"/>
+                    </div>
+                    <div class="form-arquivo">
+                        <span>Arquivo 3:</span>
+                        <input type="file" value="Enviar imagem" asp-for="Arquivos"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="campo-form">
+                <button type="submit"><i class="fa fa-send"></i> Enviar postagem</button>
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>
+            Faça <a asp-action="Login" asp-controller="Usuario">login</a> para poder enviar postagens.
+        </p>
+    }
+</section>
+
+<section>
+    <h2>Página @ViewData["PaginaAtual"]</h2>
+    @if (postagens != null && postagens.Count > 0)
+    {
+        <div id="lista-posts">
+            @for (int i = 0; i < postagens.Count; i++)
+            {
+                <partial name="_PostagemPartial" model="postagens[i]" view-data="ViewData"/>
+            }
+        </div>
+
+@section Scripts
+{
+    <script>
+        atualizarComentarios();
+        setInterval(atualizarComentarios, 3000);
+    </script>
+}    }
+    else
+    {
+        <p>Nenhuma postagem para exibir.</p>
+    }
+</section>
