@@ -23,7 +23,6 @@ namespace Forum.Controllers
         {
             pagina = pagina <= 0 ? 1 : pagina;
 
-            //TODO: Descobrir porque não traz corretamente
             var postagensPagina = _contexto.Postagens
                 .Include("Arquivos")
                 .Include("Usuario")
